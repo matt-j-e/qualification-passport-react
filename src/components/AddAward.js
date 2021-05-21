@@ -1,0 +1,130 @@
+import React, { useState, useContext, useEffect } from "react";
+import { AuthContext } from "../context/AuthContext";
+import getQualifications from "../requests/getQualifications";
+import postAward from "../requests/postAward";
+
+const AddAward = ({ setAwards }) => {
+  const { user } = useContext(AuthContext);
+
+  const initialState = {
+    fields: {
+      award_date: "",
+      expiry_date: "",
+      QualificationId: 0,
+      WorkerId: user.user.uid,
+    }
+  };
+  const [fields, setFields] = useState(initialState.fields);
+  const [qualifications, setQualifications] = useState([]);
+
+  useEffect(() => {
+    getQualifications()
+      .then((res) => {
+        setQualifications(res.data);
+      })
+  }, []);
+
+  const qualificationOptions = qualifications.map((qualification) => {
+    return (
+      <option
+        key={qualification.id}
+        value={qualification.id}
+      >
+        {qualification.name}
+      </option>
+    )
+  });
+
+  const handleFieldChange = (event) => {
+    setFields((prev) => {
+      return {
+        ...prev,
+        [event.target.name]: event.target.value,
+      };
+    });
+  };
+
+  const handleAddAward = (event) => {
+    event.preventDefault();
+    console.log(fields);
+    postAward(fields)
+      .then((response) => {
+        console.log(response);
+        if (response.status === 201) {
+          const addedQualification = qualifications.find(q => q.id.toString() === response.data.QualificationId);
+          setAwards((prev) => [
+            ...prev, 
+            {
+              id: response.data.id,
+              award_date: response.data.award_date,
+              expiry_date: response.data.expiry_date,
+              Qualification: {
+                name: addedQualification.name,
+                awarding_body: addedQualification.awarding_body,
+              }
+            }
+          ]);
+        }
+      });
+  };
+
+  return (
+    <div className="add-property-wrapper">
+      <h3>Add an award</h3>
+      <form className="add-property-form" onSubmit={handleAddAward}>
+        <div>
+          <label htmlFor="award_date">
+            Date awarded
+            <input
+              type="date"
+              id="award_date"
+              name="award_date"
+              placeholder="Date awarded"
+              value={fields.award_date}
+              onChange={handleFieldChange}
+            />
+          </label>
+        </div>
+
+        <div>
+          <label htmlFor="expiry_date">
+            Expiry date
+            <input
+              type="date"
+              id="expiry_date"
+              name="expiry_date"
+              placeholder="Expiry date"
+              value={fields.expiry_date}
+              onChange={handleFieldChange}
+            />
+          </label>
+        </div>
+
+        <div>
+          <label htmlFor="QualificationId">
+            Qualification
+            <select
+              id="QualificationId"
+              name="QualificationId"
+              value={fields.QualificationId}
+              onChange={handleFieldChange}
+            >
+              {/* <option value="2">Qualification A</option>
+              <option value="3">Qualification B</option>
+              <option value="4">Qualification C</option>
+              <option value="5">Qualification D</option>
+              <option value="6">Qualification E</option>
+              <option value="7">Qualification F</option> */}
+              {qualificationOptions}
+            </select>
+          </label>
+        </div>
+
+        <button type="submit">Add</button>
+      </form>
+    </div>
+  )
+
+};
+
+export default AddAward;

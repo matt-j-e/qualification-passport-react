@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import AwardCard from "./AwardCard";
+import AddAward from "./AddAward";
 import { useParams } from "react-router-dom";
 import getAwardsByWorker from "../requests/getAwardsByWorker";
 import getWorker from "../requests/getWorker";
@@ -8,6 +9,9 @@ import getWorker from "../requests/getWorker";
 const WorkerProfile = () => {
   const { user } = useContext(AuthContext);
   const { workerId } = useParams();
+
+  let currentUserId;
+  user ? currentUserId = user.user.uid : currentUserId = 0;
 
   const [worker, setWorker] = useState({});
   const [awards, setAwards] = useState([]);
@@ -21,14 +25,16 @@ const WorkerProfile = () => {
     })
   }, [workerId]);
 
-  // console.log(awards[0].Qualification);
+  console.log(awards, awards.length);
 
   return (
     <div>
       <h2>{worker.firstname} {worker.lastname}</h2>
       <p>{worker.email}</p>
       <h3>{worker.job}</h3>
-      {user.user.uid === workerId && (<strong>ADD A QUALIFICATION FORM TO GO HERE</strong>)}
+      {currentUserId === workerId && (
+        <AddAward setAwards={setAwards} />
+      )}
       <h3>Qualifications</h3>
       <table>
         <thead>
