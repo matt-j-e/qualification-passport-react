@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AwardCard from "./AwardCard";
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import getAwardsByWorker from "../requests/getAwardsByWorker";
 import getWorker from "../requests/getWorker";
 
@@ -24,8 +24,18 @@ const WorkerProfile = () => {
   return (
     <div>
       <h2>{worker.firstname} {worker.lastname}</h2>
+      <p>{worker.email}</p>
+      <h3>{worker.job}</h3>
       <h3>Qualifications</h3>
       <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Awarding body</th>
+            <th>Date awarded</th>
+            <th>Expiry date</th>
+          </tr>
+        </thead>
         <tbody>
           {awards.map((award) => {
             return (
