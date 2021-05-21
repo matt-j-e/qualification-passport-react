@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import authenticateUser from "../requests/authenticateUser";
-// import app from "../firebase";
 import firebase from "firebase/app";
 import firebaseConfig from "../firebase";
 
@@ -28,7 +27,8 @@ const Login = () => {
     event.preventDefault();
     authenticateUser(fields)
       .then((response) => {
-        console.log(response);
+        // response is a JSON object with the property 'data' that
+        // holds the custom JWT returned from Firebase Admin
         firebase.auth().signInWithCustomToken(response.data)
           .then((userCredential) => {
             console.log(userCredential);
