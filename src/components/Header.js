@@ -1,14 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
+import firebase from "firebase/app";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const Header = () => {
+  const { user, setUser } = useContext(AuthContext);
+  
+  const handleLogout = () => {
+    firebase.auth().signOut().then(() => {
+      console.log("Signed out")
+      setUser(null);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
   return (
     <header>
       <h1>Qualification Passport</h1>
       <nav>
         <ul>
           <li><Link to="/">Home</Link></li>
-          <li><Link to="/login">Login</Link></li>
+          {!user ? (
+            <li><Link to="/login">Login</Link></li>
+          ) : (
+            <li>
+            <button type="button" onClick={handleLogout}>Logout</button>
+          </li>
+          )}
+          
+          
         </ul>
       </nav>
     </header>

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import authenticateUser from "../requests/authenticateUser";
 import firebase from "firebase/app";
 import firebaseConfig from "../firebase";
@@ -6,6 +7,8 @@ import firebaseConfig from "../firebase";
 firebase.initializeApp(firebaseConfig);
 
 const Login = () => {
+  const { setUser } = useContext(AuthContext);
+
   const initialState = {
     fields: {
       email: "",
@@ -32,6 +35,7 @@ const Login = () => {
         firebase.auth().signInWithCustomToken(response.data)
           .then((userCredential) => {
             console.log(userCredential);
+            setUser(userCredential);
           })
           .catch((error) => {
             var errorCode = error.code;

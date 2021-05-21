@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import AwardCard from "./AwardCard";
 import { useParams } from "react-router-dom";
 import getAwardsByWorker from "../requests/getAwardsByWorker";
 import getWorker from "../requests/getWorker";
 
 const WorkerProfile = () => {
+  const { user } = useContext(AuthContext);
   const { workerId } = useParams();
 
   const [worker, setWorker] = useState({});
@@ -26,6 +28,7 @@ const WorkerProfile = () => {
       <h2>{worker.firstname} {worker.lastname}</h2>
       <p>{worker.email}</p>
       <h3>{worker.job}</h3>
+      {user.user.uid === workerId && (<strong>ADD A QUALIFICATION FORM TO GO HERE</strong>)}
       <h3>Qualifications</h3>
       <table>
         <thead>
