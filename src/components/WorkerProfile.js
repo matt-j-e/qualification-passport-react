@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import firebase from "firebase/app";
 import { AuthContext } from "../context/AuthContext";
 import AwardCard from "./AwardCard";
 import AddAward from "./AddAward";
@@ -7,11 +8,18 @@ import getAwardsByWorker from "../requests/getAwardsByWorker";
 import getWorker from "../requests/getWorker";
 
 const WorkerProfile = () => {
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
+
+  firebase.auth().onAuthStateChanged(function(firebaseUser) {
+    if (firebaseUser) {
+      setUser(firebaseUser);
+    }
+  });
+
   const { workerId } = useParams();
 
-  let currentUserId;
-  user ? currentUserId = user.user.uid : currentUserId = 0;
+  let currentUserEmail;
+  user ? currentUserEmail = user.email : currentUserEmail = "";
 
   const [worker, setWorker] = useState({});
   const [awards, setAwards] = useState([]);
@@ -25,14 +33,14 @@ const WorkerProfile = () => {
     })
   }, [workerId]);
 
-  console.log(awards, awards.length);
+  // console.log(user);
 
   return (
     <div>
       <h2>{worker.firstname} {worker.lastname}</h2>
       <p>{worker.email}</p>
       <h3>{worker.job}</h3>
-      {currentUserId === workerId && (
+      {currentUserEmail === worker.email && (
         <AddAward setAwards={setAwards} />
       )}
       <h3>Qualifications</h3>

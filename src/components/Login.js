@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import authenticateUser from "../requests/authenticateUser";
+// import authenticateUser from "../requests/authenticateUser";
 import firebase from "firebase/app";
-import firebaseConfig from "../firebase";
+// import firebaseConfig from "../firebase";
 
-firebase.initializeApp(firebaseConfig);
+// firebase.initializeApp(firebaseConfig);
 
 const Login = () => {
   const { setUser } = useContext(AuthContext);
@@ -26,24 +26,41 @@ const Login = () => {
     });
   };
 
+  // const handleLogin = (event) => {
+  //   event.preventDefault();
+  //   authenticateUser(fields)
+  //     .then((response) => {
+  //       // response is a JSON object with the property 'data' that
+  //       // holds the custom JWT returned from Firebase Admin
+  //       firebase.auth().signInWithCustomToken(response.data)
+  //         .then((userCredential) => {
+  //           console.log(userCredential);
+  //           setUser(userCredential);
+  //         })
+  //         .catch((error) => {
+  //           var errorCode = error.code;
+  //           var errorMessage = error.message;
+  //           console.log(errorCode, errorMessage);
+  //         });
+  //     });
+  // };
+
   const handleLogin = (event) => {
     event.preventDefault();
-    authenticateUser(fields)
-      .then((response) => {
-        // response is a JSON object with the property 'data' that
-        // holds the custom JWT returned from Firebase Admin
-        firebase.auth().signInWithCustomToken(response.data)
-          .then((userCredential) => {
-            console.log(userCredential);
-            setUser(userCredential);
-          })
-          .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorCode, errorMessage);
-          });
+    firebase.auth().signInWithEmailAndPassword(fields.email, fields.password)
+      .then((userCredential) => {
+        // Signed in
+        console.log(userCredential);
+        // var user = userCredential.user;
+        setUser(userCredential);
+        // ...
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorCode, errorMessage);
       });
-  };
+  }
 
   return (
     <div className="login">

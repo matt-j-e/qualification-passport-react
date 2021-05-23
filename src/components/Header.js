@@ -5,6 +5,12 @@ import { AuthContext } from "../context/AuthContext";
 
 const Header = () => {
   const { user, setUser } = useContext(AuthContext);
+  firebase.auth().onAuthStateChanged(function(firebaseUser) {
+    if (firebaseUser) {
+      setUser(firebaseUser)
+    }
+  });
+  
   
   const handleLogout = () => {
     firebase.auth().signOut().then(() => {
@@ -22,7 +28,10 @@ const Header = () => {
         <ul>
           <li><Link to="/">Home</Link></li>
           {!user ? (
+            <>
+            <li><Link to="/register">Register</Link></li>
             <li><Link to="/login">Login</Link></li>
+            </>
           ) : (
             <li>
             <button type="button" onClick={handleLogout}>Logout</button>

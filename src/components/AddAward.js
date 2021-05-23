@@ -1,17 +1,24 @@
 import React, { useState, useContext, useEffect } from "react";
+import firebase from "firebase/app";
 import { AuthContext } from "../context/AuthContext";
 import getQualifications from "../requests/getQualifications";
 import postAward from "../requests/postAward";
 
 const AddAward = ({ setAwards }) => {
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
+
+  firebase.auth().onAuthStateChanged(function(firebaseUser) {
+    if (firebaseUser) {
+      setUser(firebaseUser);
+    }
+  });
 
   const initialState = {
     fields: {
       award_date: "",
       expiry_date: "",
       QualificationId: 0,
-      WorkerId: user.user.uid,
+      WorkerId: user.uid,
     }
   };
   const [fields, setFields] = useState(initialState.fields);

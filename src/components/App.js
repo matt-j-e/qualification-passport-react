@@ -4,8 +4,13 @@ import Header from "./Header";
 import Workers from "./Workers";
 import WorkerProfile from "./WorkerProfile";
 import Login from "./Login";
+import Register from "./Register";
 import "../styles/App.css";
 import { AuthContext } from "../context/AuthContext";
+import firebase from "firebase/app";
+import firebaseConfig from "../firebase";
+
+firebase.initializeApp(firebaseConfig);
 
 function App() {
   const [user, setUser] = useState(null);
@@ -15,6 +20,9 @@ function App() {
         <AuthContext.Provider value={{ user, setUser }}>
           <Header />
           <Switch>
+          <Route exact path="/register">
+              <Register />
+            </Route>
             <Route exact path="/login">
               <Login />
             </Route>
