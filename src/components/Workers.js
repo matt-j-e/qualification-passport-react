@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
 import WorkerCard from "./WorkerCard";
+import Alert from "./Alert";
 import getWorkers from "../requests/getWorkers";
 import getWorkersByJobType from "../requests/getWorkersByJobType";
 
 const Workers = () => {
-  const [workers, setworkers] = useState([]);
+  const [workers, setWorkers] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [alert, setAlert] = useState({
+    message: "",
+    isSuccess: false,
+  });
 
   useEffect(() => {
     getWorkers().then((response) => {
-      setworkers(response.data);
+      setWorkers(response.data);
     })
   }, []);
-
-  // const list = workers.map((worker) => {
-  //   return <li key={worker.id}>{worker.firstname} {worker.lastname} {worker.job}</li>
-  // });
 
   const handleSearchInputChange = (event) => {
     setSearchText(event.target.value);
@@ -23,16 +24,19 @@ const Workers = () => {
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
+    setAlert({ message: "" });
     getWorkersByJobType(searchText)
       .then((response) => {
-        setworkers(response.data);
+        response.data.length > 0
+        ? setWorkers(response.data)
+        : setAlert({ message: `The search term ${searchText} returns no results.` })
       });
       setSearchText("");
   };
 
   const reloadAll = (event) => {
     getWorkers().then((response) => {
-      setworkers(response.data);
+      setWorkers(response.data);
     });
   };
 
@@ -50,10 +54,10 @@ const Workers = () => {
             onChange={handleSearchInputChange}
           />
           <input type="submit" value="Search" />
-          
+          <input type="button" value="Reload all" onClick={reloadAll} />
         </form>
-        <button type="button" onClick={reloadAll}>Reload all</button>
       </div>
+      <Alert message={alert.message} />
       <ul>
         {workers.map((worker) => {
           return (
