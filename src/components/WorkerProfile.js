@@ -6,6 +6,7 @@ import AddAward from "./AddAward";
 import { useParams } from "react-router-dom";
 import getAwardsByWorker from "../requests/getAwardsByWorker";
 import getWorker from "../requests/getWorker";
+import formatDate from "../helpers/formatDate";
 
 const WorkerProfile = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -60,8 +61,8 @@ const WorkerProfile = () => {
                 key={award.id} 
                 name={award.Qualification.name}
                 awardingBody={award.Qualification.awarding_body}
-                awardDate={award.award_date}
-                expiryDate={award.expiry_date}
+                awardDate={formatDate(award.award_date)}
+                expiryDate={formatDate(award.expiry_date)}
               />
             );
           })}

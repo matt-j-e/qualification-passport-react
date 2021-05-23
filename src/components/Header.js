@@ -34,7 +34,8 @@ const Header = () => {
             </>
           ) : (
             <li>
-            <button type="button" onClick={handleLogout}>Logout</button>
+              <span>{user.email}</span>  
+              <button type="button" onClick={handleLogout}>Logout</button>
           </li>
           )}
           
