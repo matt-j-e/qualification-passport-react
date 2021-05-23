@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import getAwardsByWorker from "../requests/getAwardsByWorker";
 import getWorker from "../requests/getWorker";
 import formatDate from "../helpers/formatDate";
+import deleteAward from "../requests/deleteAward";
 
 const WorkerProfile = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -36,6 +37,21 @@ const WorkerProfile = () => {
 
   // console.log(user);
 
+  const handleAwardDelete = (event) => {
+    const deleteId = event.target.dataset.id;
+    deleteAward(deleteId)
+      .then((response) => {
+        if (response.status === 204) {
+          const trs = document.querySelectorAll("tr");
+          trs.forEach((tr) => {
+            if (tr.dataset.award === deleteId) {
+              tr.remove();
+            }
+          })
+        }
+      })
+  };
+
   return (
     <div>
       <h2>{worker.firstname} {worker.lastname}</h2>
@@ -58,11 +74,13 @@ const WorkerProfile = () => {
           {awards.map((award) => {
             return (
               <AwardCard
-                key={award.id} 
+                key={award.id}
+                id={award.id}
                 name={award.Qualification.name}
                 awardingBody={award.Qualification.awarding_body}
                 awardDate={formatDate(award.award_date)}
                 expiryDate={formatDate(award.expiry_date)}
+                handleDelete={handleAwardDelete}
               />
             );
           })}
