@@ -13,7 +13,6 @@ const Register = () => {
       job: "",
       email: "",
       password: "",
-      firebaseUID: "",
       passwordRepeat: "",
     },
   };
@@ -42,7 +41,7 @@ const Register = () => {
           lastname: fields.lastname,
           job: fields.job,
           email: fields.email,
-          firebaseUID: userCredential.user.uid,
+          id: userCredential.user.uid,
         });
       })
       .catch((error) => {
