@@ -3,6 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 // import authenticateUser from "../requests/authenticateUser";
 import firebase from "firebase/app";
 // import firebaseConfig from "../firebase";
+import Alert from "./Alert";
 
 // firebase.initializeApp(firebaseConfig);
 
@@ -14,8 +15,13 @@ const Login = () => {
       email: "",
       password: "",
     },
+    alert: {
+      message: "",
+      isSuccess: false,
+    }
   };
   const [fields, setFields] = useState(initialState.fields);
+  const [alert, setAlert] = useState(initialState.alert);
 
   const handleFieldChange = (event) => {
     setFields((prev) => {
@@ -53,20 +59,58 @@ const Login = () => {
         console.log(userCredential);
         // var user = userCredential.user;
         setUser(userCredential);
-        // ...
+        setAlert({
+          message: "You are logged in",
+          isSuccess: true,
+        })
       })
       .catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorCode, errorMessage);
+        if (errorCode === "auth/user-not-found") {
+          setAlert({
+            message: "We don't have an account with that email address.",
+          })
+        } else {
+          setAlert({
+            message: "Password not recognised.",
+          })
+        }
       });
   }
 
   return (
     <div className="login">
+      <Alert message={alert.message} />
       <form onSubmit={handleLogin} className="login-form" action="" method="post">
-        <input onChange={handleFieldChange} type="email" name="email" id="email" placeholder="Email" value={fields.email} />
-        <input onChange={handleFieldChange} type="password" name="password" id="password" placeholder="Password" value={fields.password} />
+        <div>
+          <label htmlFor="email">
+            Email address
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+              value={fields.email}
+              onChange={handleFieldChange}
+            />
+          </label>
+        </div>
+        <div>
+          <label htmlFor="password">
+            Password
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+              value={fields.password}
+              onChange={handleFieldChange}
+          />
+          </label>
+        </div>
+        
         <input type="submit" value="Login" />
       </form>
     </div>

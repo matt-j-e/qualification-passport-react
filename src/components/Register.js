@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import firebase from "firebase/app";
+import Alert from "./Alert";
 import postWorker from "../requests/postWorker";
 
 const Register = () => {
@@ -15,8 +16,13 @@ const Register = () => {
       password: "",
       passwordRepeat: "",
     },
+    alert: {
+      message: "",
+      isSuccess: false,
+    }
   };
   const [fields, setFields] = useState(initialState.fields);
+  const [alert, setAlert] = useState(initialState.alert);
 
   const handleFieldChange = (event) => {
     setFields((prev) => {
@@ -42,18 +48,40 @@ const Register = () => {
           job: fields.job,
           email: fields.email,
           id: userCredential.user.uid,
-        });
+        })
+        .then((response) => {
+          if (response.status === 201) {
+            setAlert({
+              message: "Your account is created and you are logged in",
+              isSuccess: true,
+            })
+          } else {
+            setAlert({
+              message: "A server error occurred. Please try again.",
+            });
+            const failedReg = firebase.auth().currentUser;
+            failedReg.delete();
+          }
+        })
       })
       .catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorCode, errorMessage);
+        setAlert({
+          message: errorMessage,
+        })
       });
+    } else {
+      setAlert({
+        message: "The two passwords didn't match. Please try again."
+      })
     }
   };
 
   return (
     <div className="register">
+      <Alert message={alert.message} />
       <form onSubmit={handleSubmit} className="register-form" action="" method="post">
         <input
           type="text"
