@@ -59,7 +59,8 @@ const WorkerProfile = () => {
     const order = sortOrder[field];
     // awards spread required so that React thinks there's a new array and rerenders
     setAwards(sortAwards([...awards], field, order));
-    setSortOrder({[field]: order*-1}); // square brackets here permit "computed property name"
+    setSortOrder({[field]: order*-1}); // square brackets permit use of computed property name
+  };
 
   return (
     <div>
