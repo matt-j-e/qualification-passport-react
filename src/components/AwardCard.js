@@ -17,14 +17,6 @@ const AwardCard = ({ id, name, awardingBody, awardDate, expiryDate, handleDelete
   let currentUserId;
   user ? currentUserId = user.uid : currentUserId = "0";
 
-  // const handleDelete = (event) => {
-  //   console.log(event.target);
-  //   deleteAward(id)
-  //     .then((response) => {
-  //       console.log(response);
-  //     })
-  // };
-
   return (
     <tr data-award={id}>
       <td>{name}</td>

@@ -81,56 +81,93 @@ const Register = () => {
 
   return (
     <div className="register">
+      <h2>Register an account</h2>
       <Alert message={alert.message} />
       <form onSubmit={handleSubmit} className="register-form" action="" method="post">
-        <input
-          type="text"
-          name="firstname"
-          id="firstname"
-          placeholder="First name"
-          value={fields.firstname}
-          onChange={handleFieldChange}
-        />
-        <input
-          type="text"
-          name="lastname"
-          id="lastname"
-          placeholder="Last name"
-          value={fields.lastname}
-          onChange={handleFieldChange}
-        />
-        <input
-          type="text"
-          name="job"
-          id="job"
-          placeholder="Job title"
-          value={fields.job}
-          onChange={handleFieldChange}
-        />
-        <input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="Email"
-          value={fields.email}
-          onChange={handleFieldChange}
-        />
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Password"
-          value={fields.password}
-          onChange={handleFieldChange}
-        />
-        <input
-          type="password"
-          name="passwordRepeat"
-          id="passwordRepeat"
-          placeholder="Repeat password"
-          value={fields.passwordRepeat}
-          onChange={handleFieldChange}
-        />
+        <div>
+          <label htmlFor="firstname">
+            First name
+            <input
+              type="text"
+              name="firstname"
+              id="firstname"
+              placeholder="First name"
+              value={fields.firstname}
+              onChange={handleFieldChange}
+            />
+          </label>
+        </div>
+
+        <div>
+          <label htmlFor="lastnname">
+            Last name
+            <input
+              type="text"
+              name="lastname"
+              id="lastname"
+              placeholder="Last name"
+              value={fields.lastname}
+              onChange={handleFieldChange}
+            />
+          </label>
+        </div>
+
+        <div>
+          <label htmlFor="job">
+            Job title
+            <input
+              type="text"
+              name="job"
+              id="job"
+              placeholder="Job title"
+              value={fields.job}
+              onChange={handleFieldChange}
+            />
+          </label>
+        </div>
+        
+        <div>
+          <label htmlFor="email">
+            Email address
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+              value={fields.email}
+              onChange={handleFieldChange}
+            />
+          </label>
+        </div>
+        
+        <div>
+          <label htmlFor="password">
+            Password
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+              value={fields.password}
+              onChange={handleFieldChange}
+            />
+          </label>
+        </div>
+        
+        <div>
+          <label htmlFor="passwordRepeat">
+            Repeat password
+            <input
+              type="password"
+              name="passwordRepeat"
+              id="passwordRepeat"
+              placeholder="Repeat password"
+              value={fields.passwordRepeat}
+              onChange={handleFieldChange}
+            />
+          </label>
+        </div>
+        
         <input type="submit" value="Register" />
       </form>
     </div>

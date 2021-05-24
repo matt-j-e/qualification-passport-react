@@ -19,13 +19,14 @@ const Workers = () => {
   }, []);
 
   const handleSearchInputChange = (event) => {
-    setSearchText(event.target.value);
+    setSearchText(event.target.value.replace(/[\W]/g, "")); // strips out non-alpha numeric
   };
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     setAlert({ message: "" });
-    getWorkersByJobType(searchText)
+    const sanitizedSearchText = searchText.replace(/[\W]/g, ""); // strips out non-alpha numeric
+    getWorkersByJobType(sanitizedSearchText)
       .then((response) => {
         response.data.length > 0
         ? setWorkers(response.data)
@@ -46,10 +47,11 @@ const Workers = () => {
       <div className="job-search-wrapper">
         <form className="job-search-form" onSubmit={handleSearchSubmit}>
           <input
+            size="25"
             type="text"
             id="job-search"
             name="job-search"
-            placeholder="eg. Lifeguard"
+            placeholder="Search term (a-z0-9 only)"
             value={searchText}
             onChange={handleSearchInputChange}
           />

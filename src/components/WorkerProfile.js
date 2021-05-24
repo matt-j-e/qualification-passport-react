@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import getAwardsByWorker from "../requests/getAwardsByWorker";
 import getWorker from "../requests/getWorker";
 import formatDate from "../helpers/formatDate";
+import sortAwards from "../helpers/sortAwards";
 import deleteAward from "../requests/deleteAward";
 
 const WorkerProfile = () => {
@@ -25,6 +26,9 @@ const WorkerProfile = () => {
 
   const [worker, setWorker] = useState({});
   const [awards, setAwards] = useState([]);
+  const [sortOrder, setSortOrder] = useState({
+    expiry_date: 1,
+  });
 
   useEffect(() => {
     getWorker(workerId).then((res) => {
@@ -34,8 +38,6 @@ const WorkerProfile = () => {
       setAwards(res.data);
     })
   }, [workerId]);
-
-  // console.log(user);
 
   const handleAwardDelete = (event) => {
     const deleteId = event.target.dataset.id;
@@ -52,6 +54,13 @@ const WorkerProfile = () => {
       })
   };
 
+  const handleSortSelection = (event) => {
+    const field = event.target.dataset.field;
+    const order = sortOrder[field];
+    // awards spread required so that React thinks there's a new array and rerenders
+    setAwards(sortAwards([...awards], field, order));
+    setSortOrder({[field]: order*-1}); // square brackets here permit "computed property name"
+
   return (
     <div>
       <h2>{worker.firstname} {worker.lastname}</h2>
@@ -67,7 +76,7 @@ const WorkerProfile = () => {
             <th>Type</th>
             <th>Awarding body</th>
             <th>Date awarded</th>
-            <th>Expiry date</th>
+            <th data-field="expiry_date" onClick={handleSortSelection}>Expiry date</th>
           </tr>
         </thead>
         <tbody>

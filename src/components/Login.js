@@ -82,6 +82,7 @@ const Login = () => {
 
   return (
     <div className="login">
+      <h2>Login</h2>
       <Alert message={alert.message} />
       <form onSubmit={handleLogin} className="login-form" action="" method="post">
         <div>
