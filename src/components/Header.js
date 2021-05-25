@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import firebase from "firebase/app";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const Header = () => {
+  const history = useHistory();
   const { user, setUser } = useContext(AuthContext);
   firebase.auth().onAuthStateChanged(function(firebaseUser) {
     if (firebaseUser) {
@@ -16,6 +17,7 @@ const Header = () => {
     firebase.auth().signOut().then(() => {
       console.log("Signed out")
       setUser(null);
+      history.push("/");
     }).catch((error) => {
       console.log(error);
     });
@@ -38,8 +40,6 @@ const Header = () => {
               <button type="button" onClick={handleLogout}>Logout</button>
           </li>
           )}
-          
-          
         </ul>
       </nav>
     </header>

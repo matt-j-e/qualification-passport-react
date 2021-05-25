@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import firebase from "firebase/app";
 import { AuthContext } from "../context/AuthContext";
+import { useParams, useHistory } from "react-router-dom";
 import AwardCard from "./AwardCard";
 import AddAward from "./AddAward";
-import { useParams } from "react-router-dom";
 import getAwardsByWorker from "../requests/getAwardsByWorker";
 import getWorker from "../requests/getWorker";
 import formatDate from "../helpers/formatDate";
@@ -11,6 +11,8 @@ import sortAwards from "../helpers/sortAwards";
 import deleteAward from "../requests/deleteAward";
 
 const WorkerProfile = () => {
+  const history = useHistory();
+  console.log(history);
   const { user, setUser } = useContext(AuthContext);
 
   firebase.auth().onAuthStateChanged(function(firebaseUser) {
@@ -28,6 +30,7 @@ const WorkerProfile = () => {
   const [awards, setAwards] = useState([]);
   const [sortOrder, setSortOrder] = useState({
     expiry_date: 1,
+    award_date: 1,
   });
 
   useEffect(() => {
@@ -54,12 +57,20 @@ const WorkerProfile = () => {
       })
   };
 
+  // const handleSortSelection = (event) => {
+  //   const field = event.target.dataset.field;
+  //   const order = sortOrder[field];
+  //   setAwards(sortAwards([...awards], field, order)); // spread creates new array so React re-renders
+  //   setSortOrder({[field]: order*-1}); // square brackets permit use of computed property name
+  // };
+
   const handleSortSelection = (event) => {
     const field = event.target.dataset.field;
-    const order = sortOrder[field];
-    // awards spread required so that React thinks there's a new array and rerenders
-    setAwards(sortAwards([...awards], field, order));
-    setSortOrder({[field]: order*-1}); // square brackets permit use of computed property name
+    setSortOrder((prev) => {
+        const order = prev[field];
+        setAwards([...sortAwards(awards, field, order)]);
+        return { ...prev, [field]: order * -1 };
+    });
   };
 
   return (
@@ -76,7 +87,7 @@ const WorkerProfile = () => {
           <tr>
             <th>Type</th>
             <th>Awarding body</th>
-            <th>Date awarded</th>
+            <th data-field="award_date" onClick={handleSortSelection}>Date awarded</th>
             <th data-field="expiry_date" onClick={handleSortSelection}>Expiry date</th>
           </tr>
         </thead>

@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 // import authenticateUser from "../requests/authenticateUser";
 import firebase from "firebase/app";
@@ -8,6 +9,7 @@ import Alert from "./Alert";
 // firebase.initializeApp(firebaseConfig);
 
 const Login = () => {
+  const history = useHistory();
   const { setUser } = useContext(AuthContext);
 
   const initialState = {
@@ -32,37 +34,18 @@ const Login = () => {
     });
   };
 
-  // const handleLogin = (event) => {
-  //   event.preventDefault();
-  //   authenticateUser(fields)
-  //     .then((response) => {
-  //       // response is a JSON object with the property 'data' that
-  //       // holds the custom JWT returned from Firebase Admin
-  //       firebase.auth().signInWithCustomToken(response.data)
-  //         .then((userCredential) => {
-  //           console.log(userCredential);
-  //           setUser(userCredential);
-  //         })
-  //         .catch((error) => {
-  //           var errorCode = error.code;
-  //           var errorMessage = error.message;
-  //           console.log(errorCode, errorMessage);
-  //         });
-  //     });
-  // };
-
   const handleLogin = (event) => {
     event.preventDefault();
     firebase.auth().signInWithEmailAndPassword(fields.email, fields.password)
       .then((userCredential) => {
         // Signed in
         console.log(userCredential);
-        // var user = userCredential.user;
         setUser(userCredential);
         setAlert({
           message: "You are logged in",
           isSuccess: true,
-        })
+        });
+        history.push("/worker/" + userCredential.user.uid);
       })
       .catch((error) => {
         var errorCode = error.code;
