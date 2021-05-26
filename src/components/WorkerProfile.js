@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import firebase from "firebase/app";
 import { AuthContext } from "../context/AuthContext";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import AwardCard from "./AwardCard";
 import AddAward from "./AddAward";
 import getAwardsByWorker from "../requests/getAwardsByWorker";
@@ -11,8 +11,6 @@ import sortAwards from "../helpers/sortAwards";
 import deleteAward from "../requests/deleteAward";
 
 const WorkerProfile = () => {
-  const history = useHistory();
-  console.log(history);
   const { user, setUser } = useContext(AuthContext);
 
   firebase.auth().onAuthStateChanged(function(firebaseUser) {

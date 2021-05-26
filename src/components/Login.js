@@ -45,7 +45,7 @@ const Login = () => {
           message: "You are logged in",
           isSuccess: true,
         });
-        history.push("/worker/" + userCredential.user.uid);
+        history.push("/alert/" + userCredential.user.uid);
       })
       .catch((error) => {
         var errorCode = error.code;

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./Header";
 import Workers from "./Workers";
 import WorkerProfile from "./WorkerProfile";
+import WorkerAlert from "./WorkerAlert";
 import Login from "./Login";
 import Register from "./Register";
 import "../styles/App.css";
@@ -31,6 +32,9 @@ function App() {
             </Route>
             <Route exact path="/worker/:workerId">
               <WorkerProfile />
+            </Route>
+            <Route exact path="/alert/:workerId">
+              <WorkerAlert />
             </Route>
           </Switch>
         </AuthContext.Provider>
