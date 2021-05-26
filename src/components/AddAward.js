@@ -31,7 +31,15 @@ const AddAward = ({ setAwards }) => {
       })
   }, []);
 
-  const qualificationOptions = qualifications.map((qualification) => {
+  // need to add an element to the beginning of the qualifications array
+  // to enable the first Qual to be selected. Previously it was referencing
+  // id of 0 which doesn't exist. 
+  const dropdownChoices = [...qualifications];
+  dropdownChoices.unshift({
+    id: 0,
+    name: "Choose a qualification",
+  });
+  const qualificationOptions = dropdownChoices.map((qualification) => {
     return (
       <option
         key={qualification.id}
