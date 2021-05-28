@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import firebase from "firebase/app";
 import Alert from "./Alert";
@@ -81,7 +82,7 @@ const Register = () => {
 
   return (
     <div className="register">
-      <h2>Register an account</h2>
+      <h2>Create an account</h2>
       <Alert message={alert.message} />
       <form onSubmit={handleSubmit} className="register-form" action="" method="post">
         <div>
@@ -170,6 +171,12 @@ const Register = () => {
         
         <input type="submit" value="Register" />
       </form>
+      <div className="account-already">
+        <p>Already have an account? <Link to="/login">Sign in</Link></p>
+      </div>
+      <div className="continue-as-guest">
+        <p><Link to="/workers">Continue as a guest</Link></p>
+      </div>
     </div>
   )
 }

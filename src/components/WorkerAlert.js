@@ -13,7 +13,6 @@ const WorkerAlert = () => {
   useEffect(() => {
     getExpiringAwardsByWorker(workerId)
       .then((res) => {
-        console.log(res);
         if (res.data.length === 0) {
           history.push("/worker/" + workerId);
         } else {

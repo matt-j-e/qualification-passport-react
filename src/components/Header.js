@@ -28,7 +28,7 @@ const Header = () => {
       <h1>Qualification Passport</h1>
       <nav>
         <ul>
-          <li><Link to="/">Home</Link></li>
+          <li><Link to="/workers">Home</Link></li>
           {!user ? (
             <>
             <li><Link to="/register">Register</Link></li>

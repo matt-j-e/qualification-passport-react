@@ -64,6 +64,7 @@ const WorkerProfile = () => {
 
   const handleSortSelection = (event) => {
     const field = event.target.dataset.field;
+    console.log(sortOrder);
     setSortOrder((prev) => {
         const order = prev[field];
         setAwards([...sortAwards(awards, field, order)]);

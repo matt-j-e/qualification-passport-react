@@ -19,21 +19,24 @@ function App() {
     <Router>
       <div className="qualpass-app">
         <AuthContext.Provider value={{ user, setUser }}>
-          <Header />
+          {/* <Header /> */}
           <Switch>
-          <Route exact path="/register">
+            <Route exact path="/">
               <Register />
             </Route>
             <Route exact path="/login">
               <Login />
             </Route>
-            <Route exact path="/">
+            <Route exact path="/workers">
+              <Header />
               <Workers />
             </Route>
             <Route exact path="/worker/:workerId">
+              <Header />
               <WorkerProfile />
             </Route>
             <Route exact path="/alert/:workerId">
+              <Header />
               <WorkerAlert />
             </Route>
           </Switch>
