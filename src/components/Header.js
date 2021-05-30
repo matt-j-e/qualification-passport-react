@@ -31,7 +31,7 @@ const Header = () => {
           <li><Link to="/workers">Home</Link></li>
           {!user ? (
             <>
-            <li><Link to="/register">Register</Link></li>
+            <li><Link to="/">Register</Link></li>
             <li><Link to="/login">Login</Link></li>
             </>
           ) : (

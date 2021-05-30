@@ -1,12 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-// import authenticateUser from "../requests/authenticateUser";
 import firebase from "firebase/app";
-// import firebaseConfig from "../firebase";
 import Alert from "./Alert";
-
-// firebase.initializeApp(firebaseConfig);
 
 const Login = () => {
   const history = useHistory();

@@ -11,13 +11,15 @@ import { AuthContext } from "../context/AuthContext";
 import firebase from "firebase/app";
 import firebaseConfig from "../firebase";
 
+import { AppWrapper } from "../styles/App";
+
 firebase.initializeApp(firebaseConfig);
 
 function App() {
   const [user, setUser] = useState(null);
   return (
     <Router>
-      <div className="qualpass-app">
+      <AppWrapper className="qualpass-app">
         <AuthContext.Provider value={{ user, setUser }}>
           {/* <Header /> */}
           <Switch>
@@ -41,7 +43,7 @@ function App() {
             </Route>
           </Switch>
         </AuthContext.Provider>
-      </div>
+      </AppWrapper>
     </Router>
   );
 }

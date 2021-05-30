@@ -5,6 +5,17 @@ import firebase from "firebase/app";
 import Alert from "./Alert";
 import postWorker from "../requests/postWorker";
 
+import { 
+  PageWrapper,
+  ImageWrapper,
+  BrandingWrapper,
+  ContentWrapper,
+  FormWrapper,
+  Form,
+  SignInLinkWrapper,
+  GuestLinkWrapper
+} from "../styles/Register";
+
 const Register = () => {
   const { setUser } = useContext(AuthContext);
 
@@ -81,103 +92,106 @@ const Register = () => {
   };
 
   return (
-    <div className="register">
+    <PageWrapper className="register">
+      <ContentWrapper>
+      <BrandingWrapper>
+        <span className="register__logo">qp</span>
+        <span className="register__name">qualpass</span>
+        <p className="register__strapline">Take the pain out of tracking your qualifications</p>
+      </BrandingWrapper>
+      <FormWrapper>
       <h2>Create an account</h2>
       <Alert message={alert.message} />
-      <form onSubmit={handleSubmit} className="register-form" action="" method="post">
+      <Form onSubmit={handleSubmit} className="register-form" action="" method="post">
+        
+        <label htmlFor="firstname">First name</label>
         <div>
-          <label htmlFor="firstname">
-            First name
-            <input
-              type="text"
-              name="firstname"
-              id="firstname"
-              placeholder="First name"
-              value={fields.firstname}
-              onChange={handleFieldChange}
-            />
-          </label>
+          <input
+            type="text"
+            name="firstname"
+            id="firstname"
+            placeholder="First name"
+            value={fields.firstname}
+            onChange={handleFieldChange}
+          />
         </div>
 
+        <label htmlFor="lastname">Last name</label>
         <div>
-          <label htmlFor="lastnname">
-            Last name
-            <input
-              type="text"
-              name="lastname"
-              id="lastname"
-              placeholder="Last name"
-              value={fields.lastname}
-              onChange={handleFieldChange}
-            />
-          </label>
+          <input
+            type="text"
+            name="lastname"
+            id="lastname"
+            placeholder="Last name"
+            value={fields.lastname}
+            onChange={handleFieldChange}
+          />
         </div>
 
+        <label htmlFor="job">Job title</label>
         <div>
-          <label htmlFor="job">
-            Job title
-            <input
-              type="text"
-              name="job"
-              id="job"
-              placeholder="Job title"
-              value={fields.job}
-              onChange={handleFieldChange}
-            />
-          </label>
+          <input
+            type="text"
+            name="job"
+            id="job"
+            placeholder="Job title"
+            value={fields.job}
+            onChange={handleFieldChange}
+          />
+        </div>
+        
+        <label htmlFor="email">Email address</label>
+        <div>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email address"
+            value={fields.email}
+            onChange={handleFieldChange}
+          />
+        </div>
+        
+        <label htmlFor="password">Password</label>
+        <div>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            value={fields.password}
+            onChange={handleFieldChange}
+          />
+        </div>
+        
+        <label htmlFor="passwordRepeat">Repeat password</label>
+        <div>
+          <input
+            type="password"
+            name="passwordRepeat"
+            id="passwordRepeat"
+            placeholder="Repeat password"
+            value={fields.passwordRepeat}
+            onChange={handleFieldChange}
+          />
         </div>
         
         <div>
-          <label htmlFor="email">
-            Email address
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Email"
-              value={fields.email}
-              onChange={handleFieldChange}
-            />
-          </label>
+          <input type="submit" value="Sign Up" />
         </div>
-        
-        <div>
-          <label htmlFor="password">
-            Password
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Password"
-              value={fields.password}
-              onChange={handleFieldChange}
-            />
-          </label>
-        </div>
-        
-        <div>
-          <label htmlFor="passwordRepeat">
-            Repeat password
-            <input
-              type="password"
-              name="passwordRepeat"
-              id="passwordRepeat"
-              placeholder="Repeat password"
-              value={fields.passwordRepeat}
-              onChange={handleFieldChange}
-            />
-          </label>
-        </div>
-        
-        <input type="submit" value="Register" />
-      </form>
-      <div className="account-already">
-        <p>Already have an account? <Link to="/login">Sign in</Link></p>
-      </div>
-      <div className="continue-as-guest">
-        <p><Link to="/workers">Continue as a guest</Link></p>
-      </div>
-    </div>
+
+        <SignInLinkWrapper className="account-already">
+          <p>Already have an account?</p><Link to="/login">Sign in</Link>
+        </SignInLinkWrapper>
+        <GuestLinkWrapper className="continue-as-guest">
+          <p><Link to="/workers">Continue as a guest</Link></p>
+        </GuestLinkWrapper>
+      </Form>
+      </FormWrapper>
+      
+      </ContentWrapper>
+      <ImageWrapper />
+    </PageWrapper>
   )
 }
 
