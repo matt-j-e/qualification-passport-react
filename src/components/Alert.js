@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { StyledAlert } from "../styles/Alert";
+
 const Alert = ({ message, success }) => {
   if (!message) return "";
-  return success ? <div>{message}</div> : <div>{message}</div>;
+  return success ? <StyledAlert className="alert">{message}</StyledAlert> : <StyledAlert className="alert">{message}</StyledAlert>;
 };
 
 Alert.propTypes = {

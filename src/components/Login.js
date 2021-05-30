@@ -1,8 +1,19 @@
 import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import firebase from "firebase/app";
 import Alert from "./Alert";
+
+import { 
+  PageWrapper,
+  ImageWrapper,
+  BrandingWrapper,
+  ContentWrapper,
+  FormWrapper,
+  Form,
+  SignInLinkWrapper,
+  GuestLinkWrapper
+} from "../styles/Register";
 
 const Login = () => {
   const history = useHistory();
@@ -60,40 +71,57 @@ const Login = () => {
   }
 
   return (
-    <div className="login">
-      <h2>Login</h2>
+    <PageWrapper className="login">
+      <ContentWrapper>
+      <BrandingWrapper>
+        <span className="register__logo">qp</span>
+        <span className="register__name">qualpass</span>
+        <p className="register__strapline">Take the pain out of tracking your qualifications</p>
+      </BrandingWrapper>
+      <FormWrapper>
+      <h2>Sign into your account</h2>
       <Alert message={alert.message} />
-      <form onSubmit={handleLogin} className="login-form" action="" method="post">
+      <Form onSubmit={handleLogin} className="login-form" action="" method="post">
+        
+      <label htmlFor="email">Email address</label>
         <div>
-          <label htmlFor="email">
-            Email address
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Email"
-              value={fields.email}
-              onChange={handleFieldChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="password">
-            Password
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Password"
-              value={fields.password}
-              onChange={handleFieldChange}
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email address"
+            value={fields.email}
+            onChange={handleFieldChange}
           />
-          </label>
+        </div>
+
+        <label htmlFor="password">Password</label>
+        <div>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            value={fields.password}
+            onChange={handleFieldChange}
+          />
         </div>
         
-        <input type="submit" value="Login" />
-      </form>
-    </div>
+        <div>
+        <input type="submit" value="Sign in" />
+        </div>
+
+        <SignInLinkWrapper className="account-already">
+          <p>Don't have an account?</p><Link to="/">Sign up</Link>
+        </SignInLinkWrapper>
+        <GuestLinkWrapper className="continue-as-guest">
+          <p><Link to="/workers">Continue as a guest</Link></p>
+        </GuestLinkWrapper>
+      </Form>
+      </FormWrapper>
+      </ContentWrapper>
+      <ImageWrapper />
+    </PageWrapper>
   )
 };
 
