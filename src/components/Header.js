@@ -3,6 +3,9 @@ import firebase from "firebase/app";
 import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
+import { BrandingWrapper } from "../styles/Register";
+import { HeaderWrapper, NavList, NavListItem, NavListSignOut, NavListSignOutButton } from "../styles/Header";
+
 const Header = () => {
   const history = useHistory();
   const { user, setUser } = useContext(AuthContext);
@@ -24,25 +27,28 @@ const Header = () => {
   }
 
   return (
-    <header>
-      <h1>Qualification Passport</h1>
+    <HeaderWrapper>
+      <BrandingWrapper>
+        <span className="register__logo">qp</span>
+        <span className="register__name">qualpass</span>
+      </BrandingWrapper>
       <nav>
-        <ul>
-          <li><Link to="/workers">Home</Link></li>
+        <NavList>
+          <NavListItem><Link to="/workers">Home</Link></NavListItem>
           {!user ? (
             <>
-            <li><Link to="/">Register</Link></li>
-            <li><Link to="/login">Login</Link></li>
+            <NavListItem><Link to="/">Register</Link></NavListItem>
+            <NavListItem><Link to="/login">Login</Link></NavListItem>
             </>
           ) : (
-            <li>
+            <NavListSignOut>
               <span>{user.email}</span>  
-              <button type="button" onClick={handleLogout}>Logout</button>
-          </li>
+              <NavListSignOutButton type="button" onClick={handleLogout}>Sign Out</NavListSignOutButton>
+          </NavListSignOut>
           )}
-        </ul>
+        </NavList>
       </nav>
-    </header>
+    </HeaderWrapper>
   )
 };
 

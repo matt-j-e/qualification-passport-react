@@ -191,6 +191,14 @@ export const Form = Styled.form`
       opacity: 0;
     }
   }
+
+  input::-webkit-input-placeholder {
+    opacity: 0.55;
+
+    @media ${device.tablet} {
+      opacity: 0;
+    }
+  }
 `;
 
 export const SignInLinkWrapper = Styled.div`

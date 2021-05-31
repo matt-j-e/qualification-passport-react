@@ -112,6 +112,7 @@ const Register = () => {
             id="firstname"
             placeholder="First name"
             value={fields.firstname}
+            autoFocus
             onChange={handleFieldChange}
           />
         </div>

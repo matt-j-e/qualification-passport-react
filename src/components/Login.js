@@ -91,6 +91,7 @@ const Login = () => {
             id="email"
             placeholder="Email address"
             value={fields.email}
+            autoFocus
             onChange={handleFieldChange}
           />
         </div>
