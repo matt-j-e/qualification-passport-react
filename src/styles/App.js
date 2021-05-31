@@ -5,5 +5,6 @@ export const AppWrapper = Styled.main`
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
+  background-color: white;
 `;
 
