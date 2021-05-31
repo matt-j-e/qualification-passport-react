@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 import { BrandingWrapper } from "../styles/Register";
-import { HeaderWrapper, NavList, NavListItem, NavListSignOut, NavListSignOutButton } from "../styles/Header";
+import { HeaderWrapper, NavWrapper, NavList, NavListItem, NavListSignOut, NavListSignOutButton } from "../styles/Header";
 
 const Header = () => {
   const history = useHistory();
@@ -32,7 +32,7 @@ const Header = () => {
         <span className="register__logo">qp</span>
         <span className="register__name">qualpass</span>
       </BrandingWrapper>
-      <nav>
+      <NavWrapper>
         <NavList>
           <NavListItem><Link to="/workers">Home</Link></NavListItem>
           {!user ? (
@@ -47,7 +47,7 @@ const Header = () => {
           </NavListSignOut>
           )}
         </NavList>
-      </nav>
+      </NavWrapper>
     </HeaderWrapper>
   )
 };
