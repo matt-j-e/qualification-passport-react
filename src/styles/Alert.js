@@ -6,5 +6,6 @@ export const StyledAlert = Styled.div`
   padding: 2%;
   margin-bottom: 2%;
   background-color: red;
+  color: var(--gray-500);
   text-align: center;
 `;

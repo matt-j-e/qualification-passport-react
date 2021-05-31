@@ -2,13 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
+import {
+  WorkerListItem,
+  WorkerName,
+  WorkerJob
+} from "../styles/WorkerCard";
+
 const WorkerCard = ({ id, firstname, lastname, job }) => {
   const path = "/worker/" + id;
   return (
-    <li>
-      {firstname} {lastname} {job}
+    <WorkerListItem>
+      <span>
+        <WorkerName>{firstname} {lastname}</WorkerName>
+        <WorkerJob>{job}</WorkerJob>
+      </span>
       <Link to={path}>Profile</Link>
-    </li>
+    </WorkerListItem>
   )
 };
 

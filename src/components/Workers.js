@@ -4,6 +4,14 @@ import Alert from "./Alert";
 import getWorkers from "../requests/getWorkers";
 import getWorkersByJobType from "../requests/getWorkersByJobType";
 
+import {
+  WorkersWrapper,
+  Heading,
+  JobSearchWrapper,
+  JobSearchForm,
+  WorkersList
+} from "../styles/Workers";
+
 const Workers = () => {
   const [workers, setWorkers] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -42,25 +50,26 @@ const Workers = () => {
   };
 
   return (
-    <section>
-      <h1>Workers</h1>
-      <div className="job-search-wrapper">
-        <form className="job-search-form" onSubmit={handleSearchSubmit}>
+    <WorkersWrapper>
+      <Heading>Workers</Heading>
+      <JobSearchWrapper>
+        <JobSearchForm onSubmit={handleSearchSubmit}>
+        <h2>Job search form</h2>
           <input
             size="25"
             type="text"
             id="job-search"
             name="job-search"
-            placeholder="Search term (a-z0-9 only)"
+            placeholder="Job type (a-z0-9 only)"
             value={searchText}
             onChange={handleSearchInputChange}
           />
           <input type="submit" value="Search" />
-          <input type="button" value="Reload all" onClick={reloadAll} />
-        </form>
-      </div>
+          <input type="button" value="Reload" onClick={reloadAll} />
+        </JobSearchForm>
+      </JobSearchWrapper>
       <Alert message={alert.message} />
-      <ul>
+      <WorkersList>
         {workers.map((worker) => {
           return (
             <WorkerCard
@@ -72,8 +81,8 @@ const Workers = () => {
             />
           );
         })}
-      </ul>
-    </section>
+      </WorkersList>
+    </WorkersWrapper>
   )
 };
 
