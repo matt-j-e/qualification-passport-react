@@ -4,6 +4,12 @@ import { AuthContext } from "../context/AuthContext";
 import getQualifications from "../requests/getQualifications";
 import postAward from "../requests/postAward";
 
+import {
+  AddAwardWrapper,
+  AddAwardHeading,
+  Form
+} from "../styles/AddAward";
+
 const AddAward = ({ setAwards }) => {
   const { user, setUser } = useContext(AuthContext);
 
@@ -84,9 +90,9 @@ const AddAward = ({ setAwards }) => {
   };
 
   return (
-    <div className="add-property-wrapper">
-      <h3>Add an award</h3>
-      <form className="add-property-form" onSubmit={handleAddAward}>
+    <AddAwardWrapper>
+      <AddAwardHeading>Add a qualification</AddAwardHeading>
+      <Form className="add-property-form" onSubmit={handleAddAward}>
         <div>
           <label htmlFor="award_date">
             Date awarded
@@ -136,8 +142,8 @@ const AddAward = ({ setAwards }) => {
         </div>
 
         <button type="submit">Add</button>
-      </form>
-    </div>
+      </Form>
+    </AddAwardWrapper>
   )
 
 };

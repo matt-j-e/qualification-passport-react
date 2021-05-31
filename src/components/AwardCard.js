@@ -25,7 +25,7 @@ const AwardCard = ({ id, name, awardingBody, awardDate, expiryDate, handleDelete
       <td>{expiryDate}</td>
       {
         profileOwner === currentUserId
-        && (<td><button type="button" data-id={id} onClick={handleDelete}>X</button></td>)
+        && (<td className="delete"><button type="button" data-id={id} onClick={handleDelete}>X</button></td>)
       }
     </tr>
   )

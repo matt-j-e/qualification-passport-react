@@ -10,6 +10,15 @@ import formatDate from "../helpers/formatDate";
 import sortAwards from "../helpers/sortAwards";
 import deleteAward from "../requests/deleteAward";
 
+import {
+  WorkerProfileWrapper,
+  Heading,
+  Email,
+  JobTitle,
+  QualificationsHeader,
+  Table
+} from "../styles/WorkerProfile";
+
 const WorkerProfile = () => {
   const { user, setUser } = useContext(AuthContext);
 
@@ -73,21 +82,21 @@ const WorkerProfile = () => {
   };
 
   return (
-    <div>
-      <h2>{worker.firstname} {worker.lastname}</h2>
-      <p>{worker.email}</p>
-      <h3>{worker.job}</h3>
-      {currentUserEmail === worker.email && (
-        <AddAward setAwards={setAwards} />
-      )}
-      <h3>Qualifications</h3>
-      <table>
+    <WorkerProfileWrapper>
+      <Heading>{worker.firstname} {worker.lastname}</Heading>
+      <Email>{worker.email}</Email>
+      <JobTitle>{worker.job}</JobTitle>
+      <QualificationsHeader>-- Qualifications --</QualificationsHeader>
+      <Table>
         <thead>
           <tr>
             <th>Type</th>
             <th>Awarding body</th>
             <th data-field="award_date" onClick={handleSortSelection}>Date awarded</th>
             <th data-field="expiry_date" onClick={handleSortSelection}>Expiry date</th>
+            {currentUserEmail === worker.email && (
+              <th></th>
+            )}
           </tr>
         </thead>
         <tbody>
@@ -105,8 +114,11 @@ const WorkerProfile = () => {
             );
           })}
         </tbody>
-      </table>
-    </div>
+      </Table>
+      {currentUserEmail === worker.email && (
+        <AddAward setAwards={setAwards} />
+      )}
+    </WorkerProfileWrapper>
   )
 };
 
