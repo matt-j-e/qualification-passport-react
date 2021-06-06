@@ -36,7 +36,7 @@ const WorkerAlert = () => {
     <WorkerAlertWrapper>
       <WorkerAlertHeading>Expiry alert</WorkerAlertHeading>
       <WorkerGreeting>Hi {worker.firstname}</WorkerGreeting>
-      <AlertMessage>We thought you would like to know that the following awards are due to expire within the next 4 weeks:</AlertMessage>
+      <AlertMessage>We thought you would like to know that the following awards have either expired or are due to expire within the next 4 weeks:</AlertMessage>
       <AlertList>
         {expiringAwards.map((award) => {
           return (

@@ -3,6 +3,10 @@ import device from "../helpers/device";
 
 export const WorkersWrapper = Styled.section`
   padding: 1rem 0.5rem;
+
+  @media ${device.tablet} {
+    padding: 1rem 0;
+  }
 `;
 
 export const Heading = Styled.h1`
@@ -45,6 +49,10 @@ export const JobSearchForm = Styled.form`
     font-size: 0.9rem;
     border: none;
 
+    &:focus {
+      outline: 2px solid var(--gray-400);
+    }
+
     @media ${device.tablet} {
       font-size: 1rem;
       height: 2rem;
@@ -65,6 +73,7 @@ export const JobSearchForm = Styled.form`
     text-transform: uppercase;
     font-size: 0.8rem;
     padding: 0.4rem;
+    cursor: pointer;
 
     @media ${device.tablet} {
       margin: 0 1rem;

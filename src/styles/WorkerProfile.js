@@ -117,6 +117,16 @@ export const Table = Styled.table`
     text-align: center;
   }
 
+  td.expiring {
+    background-color: var(--compliment-300);
+    color: var(--compliment-500);
+  }
+
+  td.expired {
+    background-color: var(--compliment-100);
+    color: var(--compliment-500);
+  }
+
   button {
     background-color: red;
     color: var(--gray-500);

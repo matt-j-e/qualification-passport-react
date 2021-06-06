@@ -6,7 +6,6 @@ import AwardCard from "./AwardCard";
 import AddAward from "./AddAward";
 import getAwardsByWorker from "../requests/getAwardsByWorker";
 import getWorker from "../requests/getWorker";
-import formatDate from "../helpers/formatDate";
 import sortAwards from "../helpers/sortAwards";
 import deleteAward from "../requests/deleteAward";
 
@@ -86,7 +85,7 @@ const WorkerProfile = () => {
       <Heading>{worker.firstname} {worker.lastname}</Heading>
       {/* <Email>{worker.email}</Email> */}
       <JobTitle>{worker.job}</JobTitle>
-      <QualificationsHeader>-- Qualifications --</QualificationsHeader>
+      <QualificationsHeader>Qualifications</QualificationsHeader>
       <Table>
         <thead>
           <tr>
@@ -107,8 +106,8 @@ const WorkerProfile = () => {
                 id={award.id}
                 name={award.Qualification.name}
                 awardingBody={award.Qualification.awarding_body}
-                awardDate={formatDate(award.award_date)}
-                expiryDate={formatDate(award.expiry_date)}
+                awardDate={award.award_date}
+                expiryDate={award.expiry_date}
                 handleDelete={handleAwardDelete}
               />
             );

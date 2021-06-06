@@ -20,7 +20,7 @@ const Header = () => {
     firebase.auth().signOut().then(() => {
       console.log("Signed out")
       setUser(null);
-      history.push("/");
+      // history.push("/");
     }).catch((error) => {
       console.log(error);
     });

@@ -156,6 +156,10 @@ export const Form = Styled.form`
     background-color: var(--gray-500);
     color: var(--gray-200);
 
+    &:focus {
+      outline: 2px solid var(--gray-400);
+    }
+
     @media${device.tablet} {
       height: 2.5rem;
     }
