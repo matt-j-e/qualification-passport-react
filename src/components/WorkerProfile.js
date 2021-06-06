@@ -12,7 +12,6 @@ import deleteAward from "../requests/deleteAward";
 import {
   WorkerProfileWrapper,
   Heading,
-  Email,
   JobTitle,
   QualificationsHeader,
   Table
@@ -83,37 +82,44 @@ const WorkerProfile = () => {
   return (
     <WorkerProfileWrapper>
       <Heading>{worker.firstname} {worker.lastname}</Heading>
-      {/* <Email>{worker.email}</Email> */}
       <JobTitle>{worker.job}</JobTitle>
-      <QualificationsHeader>Qualifications</QualificationsHeader>
-      <Table>
-        <thead>
-          <tr>
-            <th>Type</th>
-            <th>Awarding body</th>
-            <th data-field="award_date" onClick={handleSortSelection}>Date awarded</th>
-            <th data-field="expiry_date" onClick={handleSortSelection}>Expiry date</th>
-            {currentUserEmail === worker.email && (
-              <th>Delete</th>
-            )}
-          </tr>
-        </thead>
-        <tbody>
-          {awards.map((award) => {
-            return (
-              <AwardCard
-                key={award.id}
-                id={award.id}
-                name={award.Qualification.name}
-                awardingBody={award.Qualification.awarding_body}
-                awardDate={award.award_date}
-                expiryDate={award.expiry_date}
-                handleDelete={handleAwardDelete}
-              />
-            );
-          })}
-        </tbody>
-      </Table>
+      {
+        awards.length > 0 ? (
+          <>
+          <QualificationsHeader>Qualifications</QualificationsHeader>
+          <Table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Awarding body</th>
+                <th data-field="award_date" onClick={handleSortSelection}>Date awarded</th>
+                <th data-field="expiry_date" onClick={handleSortSelection}>Expiry date</th>
+                {currentUserEmail === worker.email && (
+                  <th>Delete</th>
+                )}
+              </tr>
+            </thead>
+            <tbody>
+              {awards.map((award) => {
+                return (
+                  <AwardCard
+                    key={award.id}
+                    id={award.id}
+                    name={award.Qualification.name}
+                    awardingBody={award.Qualification.awarding_body}
+                    awardDate={award.award_date}
+                    expiryDate={award.expiry_date}
+                    handleDelete={handleAwardDelete}
+                  />
+                );
+              })}
+            </tbody>
+          </Table>
+          </>
+        ) : (
+          <QualificationsHeader>No qualifications added yet</QualificationsHeader>
+        )
+      }
       {currentUserEmail === worker.email && (
         <AddAward setAwards={setAwards} />
       )}

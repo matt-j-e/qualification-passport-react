@@ -134,6 +134,6 @@ export const Table = Styled.table`
   }
 
   tbody tr:nth-of-type(odd) {
-    background: var(--gray-400);
+    background: var(--gray-500);
   }
 `;
