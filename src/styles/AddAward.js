@@ -3,7 +3,11 @@ import device from "../helpers/device";
 
 export const AddAwardWrapper = Styled.section`
   margin-top: 2rem;
-  width: 380px;
+  width: 100%;
+
+  @media ${device.tablet} {
+    width: 380px;
+  }
 `;
 
 export const AddAwardHeading = Styled.h3`
@@ -21,7 +25,7 @@ export const Form = Styled.form`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--primary-400);
+    background-color: var(--gray-400);
     padding: 0.5rem;
     margin-bottom: 1rem;
   }
@@ -37,5 +41,10 @@ export const Form = Styled.form`
     background-color: var(--compliment-300);
     padding: 1rem;
     cursor: pointer;
+    width: 100%;
+
+    @media ${device.tablet} {
+      width: auto;
+    }
   }
 `;

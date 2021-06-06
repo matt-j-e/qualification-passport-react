@@ -84,7 +84,7 @@ const WorkerProfile = () => {
   return (
     <WorkerProfileWrapper>
       <Heading>{worker.firstname} {worker.lastname}</Heading>
-      <Email>{worker.email}</Email>
+      {/* <Email>{worker.email}</Email> */}
       <JobTitle>{worker.job}</JobTitle>
       <QualificationsHeader>-- Qualifications --</QualificationsHeader>
       <Table>
@@ -95,7 +95,7 @@ const WorkerProfile = () => {
             <th data-field="award_date" onClick={handleSortSelection}>Date awarded</th>
             <th data-field="expiry_date" onClick={handleSortSelection}>Expiry date</th>
             {currentUserEmail === worker.email && (
-              <th></th>
+              <th>Delete</th>
             )}
           </tr>
         </thead>
