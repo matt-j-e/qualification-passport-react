@@ -65,12 +65,17 @@ export const Table = Styled.table`
     tr {
       border: 1px solid var(--primary-300);
       border-bottom: none;
+
+      &:last-of-type {
+        border-bottom: 1px solid var(--primary-300);
+      }
     }
 
     tbody td {
       border: none;
-      // border-bottom: 1px solid var(--primary-300);
-      padding-left: 50%;
+      padding-left: 40%;
+      padding-top: 0.3rem;
+      padding-bottom: 0.3rem;
       position: relative;
 
       &:before {
@@ -78,7 +83,7 @@ export const Table = Styled.table`
         font-weight: 700;
         top: 0.5rem;
         left: 0.5rem;
-        width: 45%;
+        width: 35%;
         padding-right: 0.8rem;
         white-space: nowrap;
       }

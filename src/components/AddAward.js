@@ -85,6 +85,7 @@ const AddAward = ({ setAwards }) => {
               }
             }
           ]);
+          setFields(initialState.fields);
         }
       });
   };

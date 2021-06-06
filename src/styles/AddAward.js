@@ -11,8 +11,9 @@ export const AddAwardWrapper = Styled.section`
 `;
 
 export const AddAwardHeading = Styled.h3`
-  background-color: var(--primary-300);
-  color: var(--primary-400);
+  // background-color: var(--primary-300);
+  border: 1px solid var(--primary-100);
+  color: var(--primary-100);
   text-transform: uppercase;
   text-align: center;
   padding: 0.5rem;

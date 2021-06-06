@@ -34,17 +34,20 @@ const Header = () => {
       </BrandingWrapper>
       <NavWrapper>
         <NavList>
-          <NavListItem><Link to="/workers">Home</Link></NavListItem>
+          <NavListItem><Link to="/workers">Workers</Link></NavListItem>
           {!user ? (
             <>
             <NavListItem><Link to="/">Register</Link></NavListItem>
             <NavListItem><Link to="/login">Login</Link></NavListItem>
             </>
           ) : (
+            <>
+            <NavListItem><Link to={`/worker/${user.uid}`}>Your Profile</Link></NavListItem>
             <NavListSignOut>
               <span>{user.email}</span>  
               <NavListSignOutButton type="button" onClick={handleLogout}>Sign Out</NavListSignOutButton>
-          </NavListSignOut>
+            </NavListSignOut>
+            </>
           )}
         </NavList>
       </NavWrapper>
