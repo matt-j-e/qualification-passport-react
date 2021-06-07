@@ -8,7 +8,6 @@ export const WorkerProfileWrapper = Styled.section`
 
 export const Heading = Styled.h1`
   margin-bottom: 0.5rem;
-  text-transform: uppercase;
   font-weight: 100;
   font-size: 3rem;
 
@@ -38,8 +37,8 @@ export const JobTitle = Styled.h3`
 `;
 
 export const QualificationsHeader = Styled.h3`
-  background-color: var(--primary-200);
-  color: var(--primary-400);
+  background-color: var(--gray-100);
+  color: var(--gray-500);
   text-transform: uppercase;
   text-align: center;
   padding: 0.5rem;

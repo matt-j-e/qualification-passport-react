@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import firebase from "firebase/app";
 import Alert from "./Alert";
@@ -17,6 +17,7 @@ import {
 } from "../styles/Register";
 
 const Register = () => {
+  const history = useHistory();
   const { setUser } = useContext(AuthContext);
 
   const initialState = {
@@ -66,7 +67,8 @@ const Register = () => {
             setAlert({
               message: "Your account is created and you are logged in",
               isSuccess: true,
-            })
+            });
+            history.push("/worker/" + userCredential.user.uid);
           } else {
             setAlert({
               message: "A server error occurred. Please try again.",

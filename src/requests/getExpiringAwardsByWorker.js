@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const getExpiringAwardsByWorker = async (id) => {
-  const path = `http://localhost:4010/awards/expiring/${id}`;
+  const path = `${process.env.REACT_APP_BACKEND_API_URL}/awards/expiring/${id}`;
   try {
     const response = await axios.get(path);
     return response;

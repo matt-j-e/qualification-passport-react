@@ -25,7 +25,8 @@ export const JobSearchWrapper = Styled.div`
 
   @media ${device.tablet} {
     padding: 1rem;
-    background-color: var(--primary-300);
+    background-color: rgba(0,0,0,0.15);
+    border: 1px solid rgba(0,0,0,0.25);
   }
 `;
 
@@ -39,9 +40,9 @@ export const JobSearchForm = Styled.form`
       display: block;
       padding-bottom: 0.5rem;
       font-size: 1rem;
-      font-weight: 200;
+      font-weight: 300;
       text-transform: uppercase;
-      color: var(--gray-500);
+      color: var(--gray-100);
     }
   }
 
@@ -50,11 +51,11 @@ export const JobSearchForm = Styled.form`
     border: none;
 
     &:focus {
-      outline: 2px solid var(--gray-400);
+      outline: 1px solid var(--compliment-200);
     }
 
     @media ${device.tablet} {
-      font-size: 1rem;
+      font-size: 0.9rem;
       height: 2rem;
     }
   }
@@ -77,7 +78,7 @@ export const JobSearchForm = Styled.form`
 
     @media ${device.tablet} {
       margin: 0 1rem;
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
   }
 

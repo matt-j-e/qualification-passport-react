@@ -43,7 +43,7 @@ const AddAward = ({ setAwards }) => {
   const dropdownChoices = [...qualifications];
   dropdownChoices.unshift({
     id: 0,
-    name: "Choose a qualification",
+    name: "Choose qualification",
   });
   const qualificationOptions = dropdownChoices.map((qualification) => {
     return (
@@ -95,6 +95,20 @@ const AddAward = ({ setAwards }) => {
       <AddAwardHeading>Add a qualification</AddAwardHeading>
       <Form className="add-property-form" onSubmit={handleAddAward}>
         <div>
+          <label htmlFor="QualificationId">
+            
+            <select
+              id="QualificationId"
+              name="QualificationId"
+              value={fields.QualificationId}
+              onChange={handleFieldChange}
+            >
+              {qualificationOptions}
+            </select>
+          </label>
+        </div>
+
+        <div>
           <label htmlFor="award_date">
             Date awarded
             <input
@@ -119,26 +133,6 @@ const AddAward = ({ setAwards }) => {
               value={fields.expiry_date}
               onChange={handleFieldChange}
             />
-          </label>
-        </div>
-
-        <div>
-          <label htmlFor="QualificationId">
-            Qualification
-            <select
-              id="QualificationId"
-              name="QualificationId"
-              value={fields.QualificationId}
-              onChange={handleFieldChange}
-            >
-              {/* <option value="2">Qualification A</option>
-              <option value="3">Qualification B</option>
-              <option value="4">Qualification C</option>
-              <option value="5">Qualification D</option>
-              <option value="6">Qualification E</option>
-              <option value="7">Qualification F</option> */}
-              {qualificationOptions}
-            </select>
           </label>
         </div>
 
