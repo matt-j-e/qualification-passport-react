@@ -35,6 +35,10 @@ export const Form = Styled.form`
     font-size: 0.9rem;
   }
 
+  select {
+    width: 100%;
+  }
+
   button {
     text-transform: uppercase;
     font-size: 1rem;
