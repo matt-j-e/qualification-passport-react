@@ -1,5 +1,4 @@
 import Styled from "styled-components";
-import device from "../helpers/device";
 
 export const WorkerProfileWrapper = Styled.section`
   padding: 1rem 0.5rem;
