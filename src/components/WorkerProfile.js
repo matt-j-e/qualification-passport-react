@@ -4,6 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 import { useParams } from "react-router-dom";
 import AwardCard from "./AwardCard";
 import AddAward from "./AddAward";
+import ColoursKey from "./ColoursKey";
 import getAwardsByWorker from "../requests/getAwardsByWorker";
 import getWorker from "../requests/getWorker";
 import sortAwards from "../helpers/sortAwards";
@@ -115,6 +116,7 @@ const WorkerProfile = () => {
               })}
             </tbody>
           </Table>
+          <ColoursKey />
           </>
         ) : (
           <QualificationsHeader>No qualifications added yet</QualificationsHeader>

@@ -6,7 +6,12 @@ export const AddAwardWrapper = Styled.section`
   width: 100%;
 
   @media ${device.tablet} {
-    width: 380px;
+    width: 50%;
+    margin-top: 4rem;
+  }
+
+  @media ${device.laptopM} {
+    width: 35%
   }
 `;
 
