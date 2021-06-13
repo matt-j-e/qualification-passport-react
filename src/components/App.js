@@ -6,7 +6,6 @@ import WorkerProfile from "./WorkerProfile";
 import WorkerAlert from "./WorkerAlert";
 import Login from "./Login";
 import Register from "./Register";
-import "../styles/App.css";
 import { AuthContext } from "../context/AuthContext";
 import firebase from "firebase/app";
 import firebaseConfig from "../firebase";

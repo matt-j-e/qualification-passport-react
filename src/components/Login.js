@@ -46,7 +46,7 @@ const Login = () => {
     firebase.auth().signInWithEmailAndPassword(fields.email, fields.password)
       .then((userCredential) => {
         // Signed in
-        console.log(userCredential);
+        // console.log(userCredential);
         setUser(userCredential);
         setAlert({
           message: "You are logged in",

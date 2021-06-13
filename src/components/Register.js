@@ -52,8 +52,8 @@ const Register = () => {
       firebase.auth().createUserWithEmailAndPassword(fields.email, fields.password)
       .then((userCredential) => {
         // Signed in 
-        console.log(userCredential);
-        console.log(fields);
+        // console.log(userCredential);
+        // console.log(fields);
         setUser(userCredential);
         postWorker({
           firstname: fields.firstname,
