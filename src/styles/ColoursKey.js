@@ -3,10 +3,10 @@ import device from "../helpers/device";
 
 export const ColoursKeyWrapper = Styled.section`
   display: none;
+  font-size: 70%;
 
   @media ${device.tablet} {
-    // margin-top: 2rem;
-    width: 40%;
+    width: 20%;
     float: right;
     display: flex;
     flex-direction: column;
@@ -15,7 +15,7 @@ export const ColoursKeyWrapper = Styled.section`
   }
 
   @media ${device.laptopM} {
-    width: 30%;
+    width: 15%;
   }
 `;
 

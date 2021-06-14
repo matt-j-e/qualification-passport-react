@@ -147,11 +147,11 @@ export const Form = Styled.form`
   }
   
   input {
-    width: 95%;
+    width: 97%;
     height: 1.8rem;
     border: 0;
     margin-bottom: 1rem;
-    padding-left: 5%;
+    padding-left: 3%;
     font-size: 1rem;
     background-color: var(--gray-500);
     color: var(--gray-200);
@@ -182,6 +182,7 @@ export const Form = Styled.form`
     color: rgba(255,255,255,0.95);
     font-size: 1.1rem;
     font-weight: 700;
+    cursor: pointer;
 
     @media ${device.tablet} {
       margin-top: 1rem;
